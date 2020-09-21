@@ -33,7 +33,7 @@ def train_action(command_parser):
     parser.add_argument('--auto_resume_checkpoint', action='store_true')
 
     parser.add_argument("--steps_per_epoch", type=int, default=512)
-    parser.add_argument("--optimizer_name", type=str, default="adadelta")
+    parser.add_argument("--optimizer_name", type=str, default="adam")
 
     def action(args):
         return train(model=args.model_name,
@@ -103,9 +103,9 @@ def evaluate_model_action(command_parser):
     parser.add_argument("--checkpoints_path", type=str, required=True)
 
     def action(args):
-        evaluate(
+        print(evaluate(
             inp_images_dir=args.images_path, annotations_dir=args.segs_path,
-            checkpoints_path=args.checkpoints_path)
+            checkpoints_path=args.checkpoints_path))
 
     parser.set_defaults(func=action)
 

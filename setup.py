@@ -1,5 +1,13 @@
 from setuptools import find_packages, setup
 
+import sys
+
+cv_ver = ""
+keras_ver = ">=2.0.0"
+if sys.version_info.major < 3:
+      cv_ver = "<=4.2.0.32" 
+      keras_ver = "<=2.3.0"
+
 
 setup(name="keras_segmentation",
       version="0.3.0",
@@ -16,10 +24,10 @@ setup(name="keras_segmentation",
             ]
       },
       install_requires=[
-            "Keras>=2.0.0",
+            "Keras"+keras_ver,
             "imageio==2.5.0",
             "imgaug==0.2.9",
-            "opencv-python",
+            "opencv-python"+cv_ver,
             "tqdm"],
       extras_require={
             # These requires provide different backends available with Keras

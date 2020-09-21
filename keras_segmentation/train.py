@@ -13,6 +13,7 @@ def find_latest_checkpoint(checkpoints_path, fail_safe=True):
 
     # Get all matching files
     all_checkpoint_files = glob.glob(checkpoints_path + ".*")
+    all_checkpoint_files = [ ff.replace(".index" , "" ) for ff in all_checkpoint_files ] # to make it work for newer versions of keras
     # Filter out entries where the epoc_number part is pure number
     all_checkpoint_files = list(filter(lambda f: get_epoch_number_from_path(f)
                                        .isdigit(), all_checkpoint_files))
@@ -67,7 +68,7 @@ def train(model,
           val_steps_per_epoch=512,
           gen_use_multiprocessing=False,
           ignore_zero_class=False,
-          optimizer_name='adadelta',
+          optimizer_name='adam',
           do_augment=False,
           augmentation_name="aug_all"):
 
